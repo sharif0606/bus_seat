@@ -78,31 +78,3 @@ Route::group(['middleware'=>isAdmin::class],function(){
         Route::resource('booking',booking::class,['as'=>'admin']);
     });
 });
-
-Route::group(['middleware'=>isOwner::class],function(){
-    Route::prefix('owner')->group(function(){
-        Route::get('/dashboard', [dash::class,'ownerDashboard'])->name('owner.dashboard');
-        Route::resource('users',user::class,['as'=>'owner']);
-    });
-});
-
-Route::group(['middleware'=>isSalesmanager::class],function(){
-    Route::prefix('salesmanager')->group(function(){
-        Route::get('/dashboard', [dash::class,'salesmanagerDashboard'])->name('salesmanager.dashboard');
-
-    });
-});
-
-Route::group(['middleware'=>isSalesman::class],function(){
-    Route::prefix('salesman')->group(function(){
-        Route::get('/dashboard', [dash::class,'salesmanDashboard'])->name('salesman.dashboard');
-
-    });
-});
-Route::group(['middleware'=>isMember::class],function(){
-    Route::prefix('member')->group(function(){
-        Route::get('/loggedMem', [dash::class,'memDashboard'])->name('member.memdashboard');
-    });
-});
-
-
