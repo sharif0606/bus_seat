@@ -31,25 +31,38 @@
             <div id="booking-going-on">
               <h4 class="text-dark  fw-bold">Bus Tickets Booking for Tour!</h4>
               <p>  Get tickets today before it's too late!</p>
-              <form action="{{route('frontbooking')}}" method="post">
+              <form action="{{route('booking.store')}}" method="post">
                 @csrf
-              
                 <div class="input-group">
-                  <label for="">Name</label>
-                  <input id="name-input" class="inp-style" type="text" name="name" placeholder="Enter your name"/>
+                  <label for="name">Name</label>
+                   <input id="name-input name" class="form-control inp-style" type="text" name="name" value="{{ old('name')}}" placeholder="Enter your name"/> 
+                    @if($errors->has('name'))
+                      <span class="text-danger"> {{ $errors->first('name') }}</span>
+                    @endif
+                </div>
+
+                <div class="input-group">
+                  <label for="contact_no">Contact No.</label>
+                  <input id="contact-no-input contact_no" class="inp-style form-control" type="tel" value="{{ old('contact_no')}}" name="contact_no" placeholder="+880-1819000000" />
+                  @if($errors->has('contact_no'))
+                    <span class="text-danger"> {{ $errors->first('contact_no') }}</span>
+                  @endif
+                </div>
+
+                <div class="form-group input-group">
+                  <label for="booking_date">{{__('Booking Date')}}</label>
+                  <input type="date" id="booking_date" class="form-control" value="{{ old('booking_date')}}" name="booking_date">
                 </div>
                 <div class="input-group">
-                  <label for="">Contact No.</label>
-                  <input id="contact-no-input" class="inp-style" type="tel" name="contact_no" placeholder="+880-1819000000" />
+                  <label for="tour_date">Tour Date</label>
+                  <input id="tour-date-input tour_date" class="inp-style form-control" value="{{ old('tour_date')}}" type="date" name="tour_date" required="required"  />
                 </div>
+
                 <div class="input-group">
-                  <label for="">Tour Date</label>
-                  <input id="tour-date-input" class="inp-style" type="date" name="tour_date" required="required"  />
-                </div>
-                <div class="input-group">
-                  <label for="">Number of Seat Booking</label >
-                  <input id="counter" class="first-class-seatBooking-seat inp-style inp-width " readonly type="number" name="no_of_seat" value="0" /> 
+                  <label for="number_of_seat">Number of Seat Booking</label >
+                  <input id="counter" class="first-class-seatBooking-seat inp-style inp-width " readonly type="number" name="number_of_seat" value="0" /> 
                   <input id="seat_list" readonly type="text" name="seat_list" value="" /> 
+                  <input id="seat_booked_list" type="hidden" name="booked_seat" /> 
 
                   <label for="">Price Per Ticket</label>
                   <input id="ticketPrice" class="inp-style inp-width " readonly  type="number"  name="price" value="500"  />
@@ -62,9 +75,10 @@
                     <div class="right" id="totalAmount">
                       <p id="total">$0</p>
                     </div>
+                    <input type="hidden" id="total_cost" name="total_price">
                   </div>
                 </div>
-                <button id="book-now" class="btn-style  py-2 my-2" type="submit">Get Tickets!</button> 
+                <button id="book-now" class="btn-style py-2 my-2" type="submit">Get Tickets!</button> 
               </form>
             </div>
               <div style="padding: 2em 0; margin:2em 0 1em 0;" id="booking-successful">
@@ -96,7 +110,7 @@
                             <tbody cl="seat-list">
                                 <tr>
                                     <th scope="col" class="border text-center ">
-                                        <button type="button" class="btn text-black fw-bold" value="1" >1</button>
+                                        <button type="button" class="btn text-black fw-bold fullbutton" value="1" >1</button>
                                     </th>
                                     <th scope="col" colspan="2" class="border text-center ">
                                     </th>
@@ -417,7 +431,9 @@
       }
       document.getElementById('counter').value = bookedSeats;
       document.getElementById('totalAmount').textContent = `Total Amount: ${totalAmount}`;
+      document.getElementById('total_cost').value =totalAmount;
       document.getElementById('seat_list').value=seatbooked.join();
+      document.getElementById('seat_booked_list').value = seatbooked;
   }
 
   // Add click event listeners to all buttons

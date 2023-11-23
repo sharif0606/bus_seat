@@ -36,13 +36,13 @@
             <div class="collapse navbar-collapse" id="btn">
                 <ul class="navbar-nav">
                     <li class="nav-item mx-3">
-                        <a class="nav-link active navLinkText fw-600" aria-current="page" href="index.html">Home</a >
+                        <a class="nav-link active navLinkText fw-600" aria-current="page" href="{{route('home')}}">Home</a >
                     </li>
                     <li class="nav-item mx-3">
-                        <a class="nav-link navLinkText" href="about.html">About Us</a>
+                        <a class="nav-link navLinkText" href="{{route('about')}}">About Us</a>
                     </li>
                     <li class="nav-item mx-3">
-                        <a class="nav-link navLinkText" href="contact.html">Contact</a>
+                        <a class="nav-link navLinkText" href="#">Contact</a>
                     </li>
                 </ul>
           </div>

@@ -12,6 +12,7 @@ use App\Http\Controllers\CategoryController as category;
 use App\Http\Controllers\PostController as post;
 use App\Http\Controllers\PageController as page;
 use App\Http\Controllers\BookingController as booking;
+use App\Http\Controllers\SeatDetailController as seat_detail;
 use App\Http\Controllers\FrontendController as frontend;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\CommentController as comment;
@@ -37,6 +38,7 @@ use App\Http\Middleware\isSalesman;
 
 Route::get('/', [frontend::class,'home'])->name('home');
 Route::get('/home', [frontend::class,'home'])->name('home');
+Route::post('/booking-store', [booking::class,'booking_store'])->name('booking.store');
 Route::get('/about', [frontend::class,'about'])->name('about');
 Route::get('/post/{id}', [frontend::class,'single_post'])->name('single_post');
 Route::get('/page/{slug}', [frontend::class,'single_page'])->name('single_page');
@@ -76,5 +78,7 @@ Route::group(['middleware'=>isAdmin::class],function(){
         
         /* Booking */
         Route::resource('booking',booking::class,['as'=>'admin']);
+        /* Seat_detail */
+        Route::resource('seat_detail',seat_detail::class,['as'=>'admin']);
     });
 });

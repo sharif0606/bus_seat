@@ -22,6 +22,12 @@
             <span>{{__('Booking') }}</span>
         </a>
     </li>
+    <li class="sidebar-item">
+        <a href="{{route(currentUser().'.seat_detail.index')}}" class='sidebar-link'>
+            <i class="bi bi-grid-fill"></i>
+            <span>{{__('Seat Detail') }}</span>
+        </a>
+    </li>
     {{-- <li class="sidebar-item">
         <a href="{{route(currentUser().'.category.index')}}" class='sidebar-link'>
             <i class="bi bi-grid-fill"></i>

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Seat_detail;
 use App\Models\Booking;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 
-class BookingController extends Controller
+class SeatDetailController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,8 @@ class BookingController extends Controller
      */
     public function index()
     {
-        $booking=Booking::paginate(10);
-        return view('booking.index',compact('booking'));
+        $booking=Seat_detail::paginate(10);
+        return view('seat_detail.index',compact('booking'));
     }
 
     /**
@@ -26,7 +27,8 @@ class BookingController extends Controller
      */
     public function create()
     {
-        return view('booking.create');
+        $booking=Booking::all();
+        return view('seat_detail.create',compact('booking'));
     }
 
     /**
@@ -38,18 +40,15 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         try{
-            $booking=new Booking;
+            $booking=new Seat_detail;
+            $booking->booking_id=$request->booking_id;
             $booking->name=$request->name;
-            $booking->contact_no=$request->contact_no;
             $booking->tour_date=$request->tour_date;
-            $booking->booking_date=$request->booking_date;
             $booking->number_of_seat=$request->number_of_seat;
             $booking->booked_seat=$request->booked_seat;
-            $booking->price=$request->price;
-            $booking->total_price=$request->total_price;
             if($booking->save()){
                 Toastr::success('booking Create Successfully!');
-                return redirect()->route(currentUser().'.booking.index');
+                return redirect()->route(currentUser().'.seat_detail.index');
             }else{
                 Toastr::warning('Please try Again!');
                 return redirect()->back();
@@ -62,40 +61,14 @@ class BookingController extends Controller
         }
     }
 
-    public function booking_store(Request $request)
-    {
-        try{
-            $booking=new Booking;
-            $booking->name=$request->name;
-            $booking->contact_no=$request->contact_no;
-            $booking->tour_date=$request->tour_date;
-            $booking->booking_date=$request->booking_date;
-            $booking->number_of_seat=$request->number_of_seat;
-            $booking->booked_seat=$request->booked_seat;
-            $booking->price=$request->price;
-            $booking->total_price=$request->total_price;
-            if($booking->save()){
-                Toastr::success('booking Create Successfully!');
-                return redirect()->back();
-            }else{
-                Toastr::warning('Please try Again!');
-                return redirect()->back();
-            }
-        }
-        catch (Exception $e){
-            Toastr::warning('Please try Again!');
-            // dd($e);
-            return back()->withInput();
-        }
-    }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\booking  $booking
+     * @param  \App\Models\Seat_detail  $seat_detail
      * @return \Illuminate\Http\Response
      */
-    public function show(booking $booking)
+    public function show(Seat_detail $seat_detail)
     {
         //
     }
@@ -103,38 +76,35 @@ class BookingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Booking  $booking
+     * @param  \App\Models\Seat_detail  $seat_detail
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $booking=Booking::findOrFail(encryptor('decrypt',$id));
-        return view('booking.edit',compact('booking'));
+        $booking=Seat_detail::findOrFail(encryptor('decrypt',$id));
+        return view('Seat_detail.edit',compact('booking'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\booking  $booking
+     * @param  \App\Models\Seat_detail  $seat_detail
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         try{
-            $data=Booking::findOrFail(encryptor('decrypt',$id));
-            $data->name=$request->name;
-            $data->contact_no=$request->contact_no;
-            $data->tour_date=$request->tour_date;
-            $data->booking_date=$request->booking_date;
-            $data->number_of_seat=$request->number_of_seat;
+            $data=Seat_detail::findOrFail(encryptor('decrypt',$id));
+            $booking->booking_id=$request->booking_id;
+            $booking->name=$request->name;
+            $booking->tour_date=$request->tour_date;
+            $booking->number_of_seat=$request->number_of_seat;
             $booking->booked_seat=$request->booked_seat;
-            $data->price=$request->price;
-            $data->total_price=$request->total_price;
 
             if($data->save()){
                 Toastr::success('Updated Successfully!');
-                return redirect()->route(currentUser().'.booking.index');
+                return redirect()->route(currentUser().'.seat_detail.index');
             }else{
                 Toastr::warning('Please try Again!');
                 return redirect()->back();
@@ -147,17 +117,16 @@ class BookingController extends Controller
 
         }
     }
-    
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\booking  $booking
+     * @param  \App\Models\Seat_detail  $seat_detail
      * @return \Illuminate\Http\Response
      */
     public function destroy( $id)
     {
-        $booking= Booking::findOrFail(encryptor('decrypt',$id));
+        $booking= Seat_detail::findOrFail(encryptor('decrypt',$id));
         $booking->delete();
         return redirect()->back();
     }

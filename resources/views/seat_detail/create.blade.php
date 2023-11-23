@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('pageTitle',trans('Create Booking'))
+@section('pageTitle',trans('Create Seat_detail'))
 @section('pageSubTitle',trans('Create'))
 
 @section('content')
@@ -14,9 +14,22 @@
                     @endif
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form" method="post" enctype="multipart/form-data" action="{{route(currentUser().'.booking.store')}}">
+                            <form class="form" method="post" enctype="multipart/form-data" action="{{route(currentUser().'.seat_detail.store')}}">
                                 @csrf
                                 <div class="row">
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="name">booking_id</label>
+                                            <select class="form-select" aria-label="Default select example" name="booking_id">
+                                            <option selected>Select booking_id</option>
+                                            @forelse ($booking as $cat )
+                                                <option value="{{$cat->id}}">{{$cat->name}}</option>
+                                            @empty
+                                                <option value="">No Data Found</option>
+                                            @endforelse
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="name">Name</label>
@@ -28,23 +41,8 @@
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="contact_no">Contact Number</label>
-                                            <input type="text" id="contact_no" class="form-control" value="{{ old('contact_no')}}" name="contact_no">
-                                            @if($errors->has('contact_no'))
-                                                <span class="text-danger"> {{ $errors->first('contact_no') }}</span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
                                             <label for="tour_date">{{__('Tour Date')}}</label>
                                             <input type="date" id="tour_date" class="form-control" value="{{ old('tour_date')}}" name="tour_date">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label for="booking_date">{{__('Booking Date')}}</label>
-                                            <input type="date" id="booking_date" class="form-control" value="{{ old('booking_date')}}" name="booking_date">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
@@ -59,19 +57,6 @@
                                             <input type="number" id="booked_seat" class="form-control" value="{{ old('booked_seat')}}" name="booked_seat">
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label for="price">{{__('price')}}</label>
-                                            <input type="number" id="price" class="form-control" value="{{ old('price')}}" name="price">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
-                                            <label for="total_price">{{__('Total_price')}}</label>
-                                            <input type="number" id="total_price" class="form-control" value="{{ old('total_price')}}" name="total_price">
-                                        </div>
-                                    </div>
-                                    
                                 </div>
                                 <div class="row">
                                     <div class="col-12 d-flex justify-content-end">

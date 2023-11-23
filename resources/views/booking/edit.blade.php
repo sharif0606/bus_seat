@@ -62,6 +62,15 @@
                                 </div> 
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
+                                        <label for="booked_seat">{{__('Booked Seat')}}</label>
+                                        <textarea type="text" id="booked_seat" class="form-control" value="{{ old('booked_seat',$booking->booked_seat)}}" name="booked_seat">{{$booking->booked_seat}}</textarea> 
+                                        @if($errors->has('booked_seat'))
+                                            <span class="text-danger"> {{ $errors->first('booked_seat') }}</span>
+                                        @endif
+                                    </div>
+                                </div> 
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
                                         <label for="price">{{__('Price')}}</label>
                                         <input type="number" id="price" class="form-control" value="{{ old('price',$booking->price)}}" name="price">
                                     </div>

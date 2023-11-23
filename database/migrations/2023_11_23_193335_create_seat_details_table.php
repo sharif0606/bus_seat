@@ -13,16 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('bookings', function (Blueprint $table) {
+        Schema::create('seat_details', function (Blueprint $table) {
             $table->id();
+            $table->string('booking_id');
             $table->string('name');
-            $table->string('contact_no');
             $table->string('tour_date');
-            $table->string('booking_date');
             $table->string('number_of_seat');
             $table->string('booked_seat');
-            $table->string('price');
-            $table->string('total_price');
             $table->timestamps();
         });
     }
@@ -34,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bookings');
+        Schema::dropIfExists('seat_details');
     }
 };
