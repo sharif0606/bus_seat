@@ -11,6 +11,7 @@ use App\Models\BookingDetail;
 
 use Illuminate\Http\Request;
 use Toastr;
+use DB;
 class FrontendController extends Controller
 {
     public function home(Request $request)
@@ -33,6 +34,7 @@ class FrontendController extends Controller
     public function booking_store(Request $request)
     {
         try{
+            DB::beginTransaction();
             $booking=new Booking;
             $booking->name=$request->name;
             $booking->contact_no=$request->contact_no;
@@ -48,15 +50,21 @@ class FrontendController extends Controller
                         $bd=new BookingDetail;
                         $bd->booking_id=$booking->id;
                         $bd->seat_no=$seat;
-                        $bd->tour_date=$request->tour_date;
+                        $bd->tour_date=$booking->booking_date;
                         $bd->save();
                     }
+                    DB::commit();
+                    session()->put('booking_date',false);
+                    Toastr::success('booking Create Successfully!');
+                    return redirect()->route('success',encryptor('encrypt',$booking->id));
+                }else{
+                    Toastr::success('No seat booked!');
+                    return back()->withInput();
                 }
-                Toastr::success('booking Create Successfully!');
-                return redirect()->route('success',encryptor('encrypt',$booking->id));
             }
         }
         catch (Exception $e){
+            DB::rollback();
             Toastr::warning('Please try Again!');
             //dd($e);
             return back()->withInput();
