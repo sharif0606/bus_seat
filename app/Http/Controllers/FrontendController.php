@@ -36,15 +36,15 @@ class FrontendController extends Controller
             $booking=new Booking;
             $booking->name=$request->name;
             $booking->contact_no=$request->contact_no;
-            $booking->tour_date=$request->tour_date;
-            $booking->booking_date=$request->booking_date;
+            $booking->tour_date=session()->get('booking_date');
+            $booking->booking_date=\Carbon\Carbon::now()->format('d-m-Y');
             $booking->number_of_seat=$request->number_of_seat;
             $booking->price=$request->price;
             $booking->total_price=$request->total_price;
             if($booking->save()){
-                $booked_seat=explode(',',$request->booked_seat);
-                if(count($booked_seat)> 1){
-                    foreach($booked_seat as $seat){
+                $seat_list=explode(',',$request->seat_list);
+                if(count($seat_list)> 1){
+                    foreach($seat_list as $seat){
                         $bd=new BookingDetail;
                         $bd->booking_id=$booking->id;
                         $bd->seat_no=$seat;
@@ -53,12 +53,12 @@ class FrontendController extends Controller
                     }
                 }
                 Toastr::success('booking Create Successfully!');
-                return redirect()->back();
+                return redirect()->route('success',encryptor('encrypt',$booking->id));
             }
         }
         catch (Exception $e){
             Toastr::warning('Please try Again!');
-            // dd($e);
+            //dd($e);
             return back()->withInput();
         }
     }
@@ -68,16 +68,11 @@ class FrontendController extends Controller
         $about = AboutSetting::first();
         return view('frontend.about',compact('about'));
     }
-    public function post_cat($slug)
+    public function success($id)
     {
-        $catinfo=Category::where('slug',$slug)->first();
-        if($catinfo){
-            $data=Post::where('category_id',$catinfo->id)->where('publish_date','<=',date('Y-m-d'))->paginate(10);
-            $homeCard=Post::where('category_id','!=',$catinfo->id)->where('publish_date','<=',date('Y-m-d'))->get();
-            return view('frontend.post_cat',compact('data','catinfo','homeCard'));
-        }else{
-            return redirect('home');
-        }
+        $data=Booking::where('id',encryptor('decrypt',$id))->first();
+        return view('frontend.success',compact('data'));
+        
     }
     
     public function single_post($id)

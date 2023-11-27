@@ -40,20 +40,14 @@ Route::get('/', [frontend::class,'home'])->name('home');
 Route::get('/home', [frontend::class,'home'])->name('home');
 Route::post('/booking-store', [frontend::class,'booking_store'])->name('booking.store');
 Route::get('/about', [frontend::class,'about'])->name('about');
-Route::get('/post/{id}', [frontend::class,'single_post'])->name('single_post');
-Route::get('/page/{slug}', [frontend::class,'single_page'])->name('single_page');
-Route::get('/category/{slug}', [frontend::class,'post_cat'])->name('fcat');
+Route::get('/success/{id}', [frontend::class,'success'])->name('success');
 Route::get('/login', [auth::class,'signInForm'])->name('login');
 Route::get('/register', [auth::class,'signUpForm'])->name('register');
 Route::post('/register', [auth::class,'signUpStore'])->name('register.store');
 Route::get('/admin', [auth::class,'signInForm'])->name('signIn');
-Route::get('/login', [auth::class,'signInForm'])->name('login');
 Route::post('/login', [auth::class,'signInCheck'])->name('login.check');
 Route::get('/logout', [auth::class,'singOut'])->name('logOut');
 Route::get('/language', [LocalizationController::class,'lang_change'])->name('LangChange');
-
-Route::get('/comment', [comment::class,'index'])->name('comment');
-Route::post('/comment', [comment::class,'store'])->name('comment.store');
 
 Route::group(['middleware'=>isAdmin::class],function(){
     Route::prefix('admin')->group(function(){
