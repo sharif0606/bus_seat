@@ -9,23 +9,139 @@
       </div>
     </div>
   </section>
-  <section class="bg-white">
+  <section class="bg-white div_design_p">
     <div class="div-design">
-      <div class="py-2 div-design-text">
-        {{-- <label for="" class="div-design-text-date">Date : </label>
-        <input type="date" name="" id="" class="me-5" />
-        <label for="">From: </label>
-        <input type="text" placeholder="select your Place"name=""id=""class="me-5"/>
-        <label for="">To: </label>
-        <input type="text" name="" id=""placeholder="select destination" class="me-5" />
-        <input type="search" class="bg-dark text-light   py-1 ps-4" name="" id="" placeholder="  Search"/>
-        <span class="bg-dark"> <a href=""><i class="fas fa-search text-white"></i></a> </span> --}}
+      <div class="py-2 ps-3 div-design-text">
+        <form action="{{route('home')}}" method="get">
+          <label for="" class="div-design-text-date text-dark">Date : </label>
+          <input type="date" name="booking_date" id="" class="me-5" @if(session()->get('booking_date')) value="{{session()->get('booking_date')}}" @endif/>
+          <button type="submit" class="btn btn-dark btn-round"><span class="fa fa-search text-white"></span> Search</button>
+        </form>
+        
       </div>
     </div>
   </section>
   <section>
+    
+    @if(session()->has('booking_date') && session()->get('booking_date')!='')
     <div class="container-fluid mt-2">
       <div class="row ">
+        <div class=" col-12 col-md-6  mt-3">
+          <h4 class="text-center text-dark  fw-bold ">Tourist Mini Bus Seat Layout</h4>
+          <?php print_r($booked); ?>
+          <table class="w-100 seat_plan">
+            <tbody cl="seat-list">
+              <tr>
+                <th scope="col" class="border text-center ">
+                  <button type="button" class="btn text-black fw-bold fullbutton" value="1"  @if(in_array(1,$booked)) disabled @endif>1</button>
+                </th>
+                <th scope="col" colspan="2" class="border text-center "></th>
+                <th scope="col" class=" border text-center ">
+                  <button type="button" class="btn text-black disabled"><span class="material-symbols-outlined">2/Driver</span> </button> 
+                </th>  
+              </tr>
+              <tr>
+                <th scope="row" class="w-25 border text-center ">
+                  <button type="button" class="btn text-black text-black disabled">
+                  <span class="material-symbols-outlined">29/Fridge</span></button>
+                </th>
+                <th class="text-center w-25 ">
+                  <button type="button" class="btn btn-outline-secondary" value="23" @if(in_array(23,$booked)) disabled @endif>23</button>
+                </th>
+                <th   class="border w-25 text-center " >
+                  <button type="button" class="btn text-black fw-bold fullbutton" value="3" @if(in_array(3,$booked)) disabled @endif>3</button>
+                </th>
+                <th  class="border w-25 text-center " >
+                  <button type="button" class="btn text-black fw-bold fullbutton" value="4" @if(in_array(4,$booked)) disabled @endif>4</button>
+                </th>
+              </tr>
+              <tr>
+                <th scope="row"  class="border w-25 text-center ">
+                  <button type="button" class="btn text-black fw-bold disabled"><span class="material-symbols-outlined">Gate</span></button>
+                </th>    
+                <th  class="text-center w-25 ">
+                  <button type="button" class="btn btn-outline-secondary text-black fw-bold" value="24" @if(in_array(24,$booked)) disabled @endif>24</button>
+                </th>
+                <th class="border text-center w-25"  >
+                  <button type="button" class="btn text-black fw-bold fullbutton" value="5" @if(in_array(5,$booked)) disabled @endif>5</button>
+                </th>
+                <th   class="border text-center w-25 " >
+                  <button type="button" class="btn text-black fw-bold fullbutton" value="6" @if(in_array(6,$booked)) disabled @endif>6</button>
+                </th>
+              </tr>
+              <tr>
+                <th scope="row" class="border text-center w-25 " >
+                  <button type="button" class="btn text-black fw-bold fullbutton" value="7" @if(in_array(7,$booked)) disabled @endif>7</button>
+                </th>
+                <th  class="text-center w-25 ">
+                  <button type="button" class="btn btn-outline-secondary text-black fw-bold" value="25" @if(in_array(25,$booked)) disabled @endif>25</button>
+                </th>
+                <th class="border text-center w-25" >
+                  <button type="button" class="btn text-black fw-bold fullbutton" value="8" @if(in_array(8,$booked)) disabled @endif>8</button>
+                </th>
+                <th class="border text-center  w-25 " >
+                  <button type="button" class="btn text-black fw-bold fullbutton" value="9" @if(in_array(9,$booked)) disabled @endif>9</button>
+                </th>
+              </tr>
+              <tr>
+                <th scope="row" class="border text-center w-25 " >
+                  <button type="button" class="btn text-black fw-bold fullbutton" value="10" @if(in_array(10,$booked)) disabled @endif>10</button>
+                </th>
+                <th  class="text-center ">
+                  <button type="button" class="btn btn-outline-secondary text-black fw-bold" value="26" @if(in_array(26,$booked)) disabled @endif>26</button>
+                </th>
+                <th   class="border text-center " >
+                  <button type="button" class="btn text-black fw-bold fullbutton" value="11" @if(in_array(11,$booked)) disabled @endif>11</button>
+                </th>
+                <th   class="border text-center " >
+                  <button type="button" class="btn text-black fw-bold fullbutton" value="12" @if(in_array(12,$booked)) disabled @endif>12</button>
+                </th>
+              </tr>
+              <tr>
+                <th scope="row" class="border text-center " >
+                  <button type="button" class="btn text-black fw-bold fullbutton" value="13" @if(in_array(13,$booked)) disabled @endif>13</button>
+                </th>
+                <th  class="text-center ">
+                  <button type="button" class="btn btn-outline-secondary text-black fw-bold" value="27" @if(in_array(27,$booked)) disabled @endif>27</button>
+                </th>
+                <th class="border text-center " >
+                  <button type="button" class="btn text-black fw-bold fullbutton" value="14" @if(in_array(14,$booked)) disabled @endif>14</button>
+                </th>
+                <th class="border text-center " >
+                  <button type="button" class="btn text-black fw-bold fullbutton" value="15" @if(in_array(15,$booked)) disabled @endif>15</button>
+                </th>
+              </tr>
+              <tr>
+                <th scope="row" class="border text-center  " >
+                  <button type="button" class="btn  fw-bold fullbutton" value="16" @if(in_array(16,$booked)) disabled @endif>16</button>
+                </th>
+                <th  class="text-center">
+                  <button type="button" class="btn btn-outline-secondary text-black fw-bold" value="28" @if(in_array(28,$booked)) disabled @endif>28</button>
+                </th>
+                <th class="border text-center " >
+                  <button type="button" class="btn text-black fw-bold fullbutton" value="17" @if(in_array(17,$booked)) disabled @endif>17</button>
+                </th>
+                <th class="border text-center " >
+                  <button type="button" class="btn text-black fw-bold fullbutton" value="18" @if(in_array(18,$booked)) disabled @endif>18</button>
+                </th>
+              </tr>
+              <tr>
+                <th scope="row" class="border text-center ">
+                  <button type="button" class="btn text-black fw-bold fullbutton" value="19" @if(in_array(19,$booked)) disabled @endif>19</button>
+                </th>
+                <th class="border text-center ">
+                  <button type="button" class="btn text-black fw-bold fullbutton" value="20" @if(in_array(20,$booked)) disabled @endif>20</button>
+                </th>
+                <th class="border text-center ">
+                  <button type="button" class="btn text-black fw-bold fullbutton" value="21" @if(in_array(21,$booked)) disabled @endif>21</button>
+                </th>
+                <th class="border text-center ">
+                  <button type="button" class="btn text-black fw-bold fullbutton" value="22" @if(in_array(22,$booked)) disabled @endif>22</button>
+                </th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <div class="col-12 col-md-6 mb-2">
           <div class="booking-form ">
             <div id="booking-going-on">
@@ -33,36 +149,29 @@
               <p>  Get tickets today before it's too late!</p>
               <form action="{{route('booking.store')}}" method="post">
                 @csrf
-                <div class="input-group">
+                <div class="form-group">
                   <label for="name">Name</label>
-                   <input id="name-input name" class="form-control inp-style" type="text" name="name" value="{{ old('name')}}" placeholder="Enter your name"/> 
-                    @if($errors->has('name'))
-                      <span class="text-danger"> {{ $errors->first('name') }}</span>
-                    @endif
+                  <input id="name-input name" class="form-control inp-style" type="text" name="name" value="{{ old('name')}}" placeholder="Enter your name"/> 
+                  @if($errors->has('name'))
+                    <span class="text-danger"> {{ $errors->first('name') }}</span>
+                  @endif
                 </div>
-
-                <div class="input-group">
+                <div class="form-group">
                   <label for="contact_no">Contact No.</label>
                   <input id="contact-no-input contact_no" class="inp-style form-control" type="tel" value="{{ old('contact_no')}}" name="contact_no" placeholder="+880-1819000000" />
                   @if($errors->has('contact_no'))
                     <span class="text-danger"> {{ $errors->first('contact_no') }}</span>
                   @endif
                 </div>
-
-                <div class="form-group input-group">
-                  <label for="booking_date">{{__('Booking Date')}}</label>
-                  <input type="date" id="booking_date" class="form-control" value="{{ old('booking_date')}}" name="booking_date">
-                </div>
-                <div class="input-group">
+                <div class="form-group">
                   <label for="tour_date">Tour Date</label>
                   <input id="tour-date-input tour_date" class="inp-style form-control" value="{{ old('tour_date')}}" type="date" name="tour_date" required="required"  />
                 </div>
 
-                <div class="input-group">
+                <div class="form-group">
                   <label for="number_of_seat">Number of Seat Booking</label >
                   <input id="counter" class="first-class-seatBooking-seat inp-style inp-width " readonly type="number" name="number_of_seat" value="0" /> 
-                  <input id="seat_list" readonly type="text" name="seat_list" value="" /> 
-                  <input id="seat_booked_list" type="hidden" name="booked_seat" /> 
+                  <input id="seat_list" readonly type="hidden" name="seat_list" value="" /> 
 
                   <label for="">Price Per Ticket</label>
                   <input id="ticketPrice" class="inp-style inp-width " readonly  type="number"  name="price" value="500"  />
@@ -73,7 +182,7 @@
                       <h4>Total</h4>
                     </div>
                     <div class="right" id="totalAmount">
-                      <p id="total">$0</p>
+                      <p id="total">BDT0</p>
                     </div>
                     <input type="hidden" id="total_cost" name="total_price">
                   </div>
@@ -103,303 +212,12 @@
             </div>
                 </div> 
                 </div>    
-                <div class=" col-12 col-md-6  mt-3 desktop-seat">
-                    
-                    <h4 class="text-center text-dark  fw-bold ">Tourist Mini Bus Seat Layout</h4>
-                      <table class="w-100 seat_plan">
-                            <tbody cl="seat-list">
-                                <tr>
-                                    <th scope="col" class="border text-center ">
-                                        <button type="button" class="btn text-black fw-bold fullbutton" value="1" >1</button>
-                                    </th>
-                                    <th scope="col" colspan="2" class="border text-center ">
-                                    </th>
-
-
-                                    <th scope="col" class=" border text-center ">
-                                        <button type="button" class="btn text-black disabled"><span class="material-symbols-outlined">2/Driver</span> </button> 
-                                    </th>  
-                                </tr>
-                                <tr>
-                                    <th scope="row" class="w-25 border text-center ">
-                                        <button type="button" class="btn text-black text-black disabled">
-                                        <span class="material-symbols-outlined">29/Fridge</span></button>
-                                    </th>
-                                    <th class="text-center w-25 ">
-                                            <button type="button" class="btn btn-outline-secondary" value="23">
-                                            23
-                                            </button>
-                                    </th>
-                                    <th   class="border w-25 text-center " >
-                                            <button type="button" class="btn text-black fw-bold fullbutton" value="3">3</button>
-                                    </th>
-                                    <th  class="border w-25 text-center " >
-                                            <button type="button" class="btn text-black fw-bold fullbutton" value="4">4</button>
-                                    </th>
-                                    
-                                </tr>
-                                <tr>
-                                    <th scope="row"  class="border w-25 text-center ">
-                                            <button type="button" class="btn text-black fw-bold disabled">
-                                            <span class="material-symbols-outlined">Gate</span>
-                                        </button>
-                                    </th>    
-                                    <th  class="text-center w-25 ">
-                                        <button type="button" class="btn btn-outline-secondary text-black fw-bold" value="24">
-                                            24
-                                        </button>
-                                        </th>
-                                    <th   class="border text-center w-25"  >
-                                            <button type="button" class="btn text-black fw-bold fullbutton" value="5">5</button>
-                                    </th>
-                                    <th   class="border text-center w-25 " >
-                                            <button type="button" class="btn text-black fw-bold fullbutton" value="6">6</button>
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th scope="row" class="border text-center w-25 " >
-                                        <button type="button" class="btn text-black fw-bold fullbutton" value="7">7</button>
-                                        </th>
-                                    <th  class="text-center w-25 ">
-                                        <button type="button" class="btn btn-outline-secondary text-black fw-bold" value="25">
-                                            25
-                                        </button>
-                                        </th>
-                                        <th   class="border text-center w-25" >
-                                        <button type="button" class="btn text-black fw-bold fullbutton" value="8">8</button>
-                                        </th>
-                                        <th   class="border text-center  w-25 " >
-                                        <button type="button" class="btn text-black fw-bold fullbutton" value="9">9</button>
-                                        </th>
-                                </tr>
-                            <tr>
-                            <th scope="row" class="border text-center w-25 " >
-                                    <button type="button" class="btn text-black fw-bold fullbutton" value="10">10</button>
-                                    </th>
-                                <th  class="text-center ">
-                                    <button type="button" class="btn btn-outline-secondary text-black fw-bold" value="26">
-                                        26
-                                    </button>
-                                    </th>
-                                    <th   class="border text-center " >
-                                    <button type="button" class="btn text-black fw-bold fullbutton" value="11">11</button>
-                                    </th>
-                                    <th   class="border text-center " >
-                                    <button type="button" class="btn text-black fw-bold fullbutton" value="12">12</button>
-                                    </th>
-                            </tr>
-                            <tr>
-                            <th scope="row" class="border text-center " >
-                                    <button type="button" class="btn text-black fw-bold fullbutton" value="13">13</button>
-                                    </th>
-                                <th  class="text-center ">
-                                    <button type="button" class="btn btn-outline-secondary text-black fw-bold" value="27">
-                                        27
-                                    </button>
-                                    </th>
-                                    <th   class="border text-center " >
-                                    <button type="button" class="btn text-black fw-bold fullbutton" value="14">14</button>
-                                    </th>
-                                    <th   class="border text-center " >
-                                    <button type="button" class="btn text-black fw-bold fullbutton" value="15">15</button>
-                                    </th>
-                            </tr>
-                            <tr>
-                            <th scope="row" class="border text-center  " >
-                                    <button type="button" class="btn  fw-bold fullbutton" value="16">16</button>
-                                    </th>
-                                <th  class="text-center">
-                                    <button type="button" class="btn btn-outline-secondary text-black fw-bold" value="28">
-                                        28
-                                    </button>
-                                    </th>
-                                    <th   class="border text-center " >
-                                    <button type="button" class="btn text-black fw-bold fullbutton" value="17">17</button>
-                                    </th>
-                                    <th   class="border text-center " >
-                                    <button type="button" class="btn text-black fw-bold fullbutton" value="18">18</button>
-                                    </th>
-                            </tr>
-                            
-                    
-                                <tr>
-                                    <th scope="row" class="border text-center ">
-                                    <button type="button" class="btn text-black fw-bold fullbutton" value="19">19</button>
-                                    </th>
-                        
-                            
-                                    <th class="border text-center ">
-                                    <button type="button" class="btn text-black fw-bold fullbutton" value="20">20</button>
-                                    </th>
-                            
-                                
-                                    <th class="border text-center ">
-                                    <button type="button" class="btn text-black fw-bold fullbutton" value="21">21</button>
-                                    </th>
-                            
-                                
-                                    <th class="border text-center ">
-                                    <button type="button" class="btn text-black fw-bold fullbutton" value="22">22</button>
-                                    </th>
-                                </tr>
-                                
-                            </tbody>
-                      </table>
-                </div>
+                
             </div>
         </div>
     </section> 
-          
-  <section>
-    <div class="container my-4">
-      <div class="mobile-seat row">
-           <h3 class="text-center text-black fw-bold">Tourist Mini Bus Seat Layout</h3>
-          <div class="col-12">
-                    <table class="w-100 seat_plan">
-                      <tr>
-                          <th scope="col" colspan="2" class="border text-center">
-                              <button type="button" class="btn text-black fw-bold " id="seat_booking" value="1">1</button>
-                          </th>
-                                  
-                          
-                          <th scope="col" colspan="2" class=" border text-center ">
-                              <button type="button" class="btn text-black disabled"><span class="material-symbols-outlined">airline_seat_recline_normal </span> </button> 
-                          </th>    
-                      </tr>
-                           
-                      <tr>
-                            <th scope="row" class="w-25 border text-center ">
-                                <button type="button" class="btn text-black text-black disabled">
-                                <span class="material-symbols-outlined">kitchen</span></button>
-                          </th>  
-
-
-                        
-                            
-                          <th   class="text-center w-25 ">
-                                  <button type="button" class="btn btn-outline-secondary" value="1">
-                                    23
-                                  </button>
-                          </th>
-                        
-                          <th   class="border w-25 text-center" >
-                                  <button type="button" class="btn text-black fw-bold fullbutton" value="1">3</button>
-                          </th>
-                          <th  class="border w-25 text-center " >
-                                  <button type="button" class="btn text-black fw-bold " value="1">4</button>
-                          </th>
-                             
-                      </tr>
-                      <tr>
-                        <th scope="row"  class="border w-25 text-center ">
-                                  <button type="button" class="btn text-black fw-bold disabled">
-                                  <span class="material-symbols-outlined">door_sliding</span>
-                                </button>
-                        </th>    
-                           <th  class="text-center w-25">
-                                <button type="button" class="btn btn-outline-secondary text-black fw-bold" value="1">
-                                  24
-                                </button>
-                              </th>
-                          th  class="border w-25 text-center " >
-                                  <button type="button" class="btn text-black fw-bold fullbutton" value="1">5</button>
-                          </th>
-                          <th   class="border text-center w-25" >
-                                  <button type="button" class="btn text-black fw-bold" value="1">6</button>
-                          </th>
-                      </tr>
-                      <tr>
-                        <th scope="row" class="border text-center w-25" >
-                                <button type="button" class="btn text-black fw-bold" value="1">7</button>
-                              </th>
-                            <th  class="text-center w-25 ">
-                                <button type="button" class="btn btn-outline-secondary text-black fw-bold" value="1">
-                                  25
-                                </button>
-                              </th>
-                              <th   class="border text-center w-25 " >
-                                <button type="button" class="btn text-black fw-bold" value="1">8</button>
-                              </th>
-                              <th   class="border text-center  w-25" >
-                                <button type="button" class="btn text-black fw-bold" value="1">9</button>
-                              </th>
-                      </tr>
-                      <tr>
-                        <th scope="row" class="border text-center w-25" >
-                                <button type="button" class="btn text-black fw-bold" value="1">10</button>
-                              </th>
-                            <th  class="text-center ">
-                                <button type="button" class="btn btn-outline-secondary text-black fw-bold" value="1">
-                                  26
-                                </button>
-                              </th>
-                              <th   class="border text-center " >
-                                <button type="button" class="btn text-black fw-bold" value="1">11</button>
-                              </th>
-                              <th   class="border text-center " >
-                                <button type="button" class="btn text-black fw-bold" value="1">12</button>
-                              </th>
-                      </tr>
-                      <tr>
-                        <th scope="row" class="border text-center " >
-                                <button type="button" class="btn text-black fw-bold" value="1">13</button>
-                              </th>
-                            <th  class="text-center ">
-                                <button type="button" class="btn btn-outline-secondary text-black fw-bold">
-                                  27
-                                </button>
-                              </th>
-                              <th   class="border text-center " >
-                                <button type="button" class="btn text-black fw-bold" value="1">14</button>
-                              </th>
-                              <th   class="border text-center " >
-                                <button type="button" class="btn text-black fw-bold" value="1">15</button>
-                              </th>
-                      </tr>
-                      <tr>
-                        <th scope="row" class="border text-center " >
-                                <button type="button" class="btn text-black fw-bold" value="1">16</button>
-                              </th>
-                            <th  class="text-center ">
-                                <button type="button" class="btn btn-outline-secondary text-black fw-bold" value="1">
-                                  28
-                                </button>
-                              </th>
-                              <th   class="border text-center " >
-                                <button type="button" class="btn text-black fw-bold" value="1">17</button>
-                              </th>
-                              <th   class="border text-center " >
-                                <button type="button" class="btn text-black fw-bold" value="1">18</button>
-                              </th>
-                      </tr>
-                      
-               
-                          <tr>
-                              <th scope="row" class="border text-center ">
-                                <button type="button" class="btn text-black fw-bold" value="1">19</button>
-                              </th>
-                     
-                      
-                              <th class="border text-center ">
-                                <button type="button" class="btn text-black fw-bold" value="1">20</button>
-                              </th>
-                        
-                          
-                              <th class="border text-center ">
-                                <button type="button" class="btn text-black fw-bold" value="1">21</button>
-                              </th>
-                         
-                           
-                              <th class="border text-center ">
-                                <button type="button" class="btn text-black fw-bold" value="1">22</button>
-                              </th>
-                            </tr>
-                           
-                 </table>
-          </div>
-      </div>
-      </div>
-  </section>
+    @endif
+  
  
 @endsection
 @push('scripts')
@@ -430,10 +248,9 @@
           seatbooked = seatbooked.filter(item => item !== $(button).val())
       }
       document.getElementById('counter').value = bookedSeats;
-      document.getElementById('totalAmount').textContent = `Total Amount: ${totalAmount}`;
+      document.getElementById('totalAmount').textContent = `Total Amount: BDT ${totalAmount}`;
       document.getElementById('total_cost').value =totalAmount;
       document.getElementById('seat_list').value=seatbooked.join();
-      document.getElementById('seat_booked_list').value = seatbooked;
   }
 
   // Add click event listeners to all buttons

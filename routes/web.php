@@ -38,7 +38,7 @@ use App\Http\Middleware\isSalesman;
 
 Route::get('/', [frontend::class,'home'])->name('home');
 Route::get('/home', [frontend::class,'home'])->name('home');
-Route::post('/booking-store', [booking::class,'booking_store'])->name('booking.store');
+Route::post('/booking-store', [frontend::class,'booking_store'])->name('booking.store');
 Route::get('/about', [frontend::class,'about'])->name('about');
 Route::get('/post/{id}', [frontend::class,'single_post'])->name('single_post');
 Route::get('/page/{slug}', [frontend::class,'single_page'])->name('single_page');

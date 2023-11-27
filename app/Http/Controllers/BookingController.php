@@ -44,7 +44,6 @@ class BookingController extends Controller
             $booking->tour_date=$request->tour_date;
             $booking->booking_date=$request->booking_date;
             $booking->number_of_seat=$request->number_of_seat;
-            $booking->booked_seat=$request->booked_seat;
             $booking->price=$request->price;
             $booking->total_price=$request->total_price;
             if($booking->save()){
@@ -62,32 +61,6 @@ class BookingController extends Controller
         }
     }
 
-    public function booking_store(Request $request)
-    {
-        try{
-            $booking=new Booking;
-            $booking->name=$request->name;
-            $booking->contact_no=$request->contact_no;
-            $booking->tour_date=$request->tour_date;
-            $booking->booking_date=$request->booking_date;
-            $booking->number_of_seat=$request->number_of_seat;
-            $booking->booked_seat=$request->booked_seat;
-            $booking->price=$request->price;
-            $booking->total_price=$request->total_price;
-            if($booking->save()){
-                Toastr::success('booking Create Successfully!');
-                return redirect()->back();
-            }else{
-                Toastr::warning('Please try Again!');
-                return redirect()->back();
-            }
-        }
-        catch (Exception $e){
-            Toastr::warning('Please try Again!');
-            // dd($e);
-            return back()->withInput();
-        }
-    }
 
     /**
      * Display the specified resource.

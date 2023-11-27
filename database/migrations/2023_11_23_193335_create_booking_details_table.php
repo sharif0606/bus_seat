@@ -13,13 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('seat_details', function (Blueprint $table) {
+        Schema::create('booking_details', function (Blueprint $table) {
             $table->id();
             $table->string('booking_id');
-            $table->string('name');
+            $table->string('seat_no');
             $table->string('tour_date');
-            $table->string('number_of_seat');
-            $table->string('booked_seat');
             $table->timestamps();
         });
     }

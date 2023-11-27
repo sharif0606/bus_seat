@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Seat_detail extends Model
+class BookingDetail extends Model
 {
     use HasFactory;
 }

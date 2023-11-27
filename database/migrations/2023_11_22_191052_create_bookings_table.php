@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('tour_date');
             $table->string('booking_date');
             $table->string('number_of_seat');
-            $table->string('booked_seat');
             $table->string('price');
             $table->string('total_price');
             $table->timestamps();
