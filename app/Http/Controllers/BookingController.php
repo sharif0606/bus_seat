@@ -101,7 +101,7 @@ class BookingController extends Controller
             $data->tour_date=$request->tour_date;
             $data->booking_date=$request->booking_date;
             $data->number_of_seat=$request->number_of_seat;
-            $booking->booked_seat=$request->booked_seat;
+            $data->booked_seat=$request->booked_seat;
             $data->price=$request->price;
             $data->total_price=$request->total_price;
 
