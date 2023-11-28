@@ -6,11 +6,6 @@ use App\Http\Controllers\DashboardController as dash;
 use App\Http\Controllers\Settings\UserController as user;
 use App\Http\Controllers\Settings\AdminUserController as admin;
 use App\Http\Controllers\SettingController as settings;
-use App\Http\Controllers\AboutSettingController as about_setting;
-use App\Http\Controllers\AdvertisementController as advertisement;
-use App\Http\Controllers\CategoryController as category;
-use App\Http\Controllers\PostController as post;
-use App\Http\Controllers\PageController as page;
 use App\Http\Controllers\BookingController as booking;
 use App\Http\Controllers\SeatDetailController as seat_detail;
 use App\Http\Controllers\FrontendController as frontend;
@@ -56,19 +51,6 @@ Route::group(['middleware'=>isAdmin::class],function(){
         Route::resource('users',user::class,['as'=>'admin']);
         Route::resource('admin',admin::class,['as'=>'admin']);
         Route::resource('settings',settings::class,['as'=>'admin']);
-
-
-        /* Category */
-        Route::resource('category',category::class,['as'=>'admin']);
-        /* About */
-        Route::resource('about_setting',about_setting::class,['as'=>'admin']);
-        /* Advertisement */
-        Route::resource('advertisement',advertisement::class,['as'=>'admin']);
-        /* Post */
-        Route::resource('post',post::class,['as'=>'admin']);
-        /* Page */
-        Route::resource('page',page::class,['as'=>'admin']);
-        Route::post('image-upload', [page::class, 'storeImage'])->name('image.upload');
         
         /* Booking */
         Route::resource('booking',booking::class,['as'=>'admin']);

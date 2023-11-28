@@ -41,8 +41,8 @@ class FrontendController extends Controller
             $booking->tour_date=session()->get('booking_date');
             $booking->booking_date=\Carbon\Carbon::now()->format('d-m-Y');
             $booking->number_of_seat=$request->number_of_seat;
-            $booking->price=$request->price;
-            $booking->total_price=$request->total_price;
+            $booking->price=500;//$request->price;
+            $booking->total_price=($request->number_of_seat * 500);//$request->total_price;
             if($booking->save()){
                 $seat_list=explode(',',$request->seat_list);
                 if(count($seat_list)> 1){
@@ -50,7 +50,7 @@ class FrontendController extends Controller
                         $bd=new BookingDetail;
                         $bd->booking_id=$booking->id;
                         $bd->seat_no=$seat;
-                        $bd->tour_date=$booking->booking_date;
+                        $bd->tour_date=$booking->tour_date;
                         $bd->save();
                     }
                     DB::commit();

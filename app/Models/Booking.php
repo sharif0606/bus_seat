@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Booking extends Model
 {
     use HasFactory;
+    public function seats(){
+        return $this->hasMany(BookingDetail::class); 
+    }
 }

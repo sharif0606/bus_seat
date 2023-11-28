@@ -18,10 +18,16 @@
                     <p class="booking-date-class mt-3">Your booking date: <span id="booking-date-final-view">{{($data->booking_date)}}</span> </p>
                     <p class="concert-date-class">Your tour date: <span id="tour-date-final-view">{{($data->tour_date)}}</span> </p>
                 <hr>
-                    <p>You have booked <span id="first-class-seatBooking-final-view"></span></p>
+                    <p>You have booked: <span id="first-class-seatBooking-final-view">
+                        @forelse ($data->seats as $item)
+                            {{$item->seat_no}},
+                        @empty
+                            
+                        @endforelse
+                    </span></p>
                 
                 <hr>
-                <p>Your total cost is  <span id="total-final-view">{{($data->total_price)}}</span> </p>
+                <p>Your total cost is:  <span id="total-final-view">{{($data->total_price)}}</span> </p>
                 <!-- <p><a href="abcdefgh@gmail.com">Send email</a></p> -->
             </div>
         </div>

@@ -5,7 +5,6 @@
       <div class="hero-text text-center">
         <p class="mb-0">Where would you like to Go?</p>
         <h1 class="mt-o"> Family-Friendly Bus <span>Tours</span> <br /> Fun for All Ages</h1>
-        <a class="button-design" type="button" href="#">Booking Now</a>
       </div>
     </div>
   </section>
@@ -14,7 +13,7 @@
       <div class="py-2 ps-3 div-design-text">
         <form action="{{route('home')}}" method="get">
           <label for="" class="div-design-text-date text-dark">Date : </label>
-          <input type="date" name="booking_date" id="" class="me-5" @if(session()->get('booking_date')) value="{{session()->get('booking_date')}}" @endif/>
+          <input type="date" min="{{date('Y-m-d',strtotime('next Friday'))}}" value="{{date('Y-m-d',strtotime('next Friday'))}}" step="7" name="booking_date" id="booking_date" class="me-5" @if(session()->get('booking_date')) value="{{session()->get('booking_date')}}" @endif/>
           <button type="submit" class="btn btn-dark btn-round"><span class="fa fa-search text-white"></span> Search</button>
         </form>
         
@@ -27,7 +26,6 @@
       <div class="row ">
         <div class=" col-12 col-md-6  mt-3">
           <h4 class="text-center text-dark  fw-bold ">Tourist Mini Bus Seat Layout</h4>
-          <?php print_r($booked); ?>
           <table class="w-100 seat_plan">
             <tbody cl="seat-list">
               <tr>
@@ -150,21 +148,21 @@
                 @csrf
                 <div class="form-group">
                   <label for="name">Name</label>
-                  <input id="name-input name" class="form-control inp-style" type="text" name="name" value="{{ old('name')}}" placeholder="Enter your name"/> 
+                  <input id="name-input name" class="form-control inp-style" type="text" required name="name" value="{{ old('name')}}" placeholder="Enter your name"/> 
                   @if($errors->has('name'))
                     <span class="text-danger"> {{ $errors->first('name') }}</span>
                   @endif
                 </div>
                 <div class="form-group">
                   <label for="contact_no">Contact No.</label>
-                  <input id="contact-no-input contact_no" class="inp-style form-control" type="tel" value="{{ old('contact_no')}}" name="contact_no" placeholder="+880-1819000000" />
+                  <input id="contact-no-input contact_no" class="inp-style form-control" required type="tel" value="{{ old('contact_no')}}" name="contact_no" placeholder="+880-1819000000" />
                   @if($errors->has('contact_no'))
                     <span class="text-danger"> {{ $errors->first('contact_no') }}</span>
                   @endif
                 </div>
                 <div class="form-group">
                   <label for="tour_date">Tour Date</label>
-                  <input id="tour-date-input tour_date" class="inp-style form-control" value="{{ old('tour_date')}}" type="date" name="tour_date"/>
+                  <input class="inp-style form-control" value="{{ old('tour_date',session()->get('booking_date'))}}" type="date" readonly name="tour_date"/>
                 </div>
 
                 <div class="form-group">
@@ -200,6 +198,7 @@
 @endsection
 @push('scripts')
 <script>
+  
     // Get all buttons with the .btn class
   const allButtons = document.querySelectorAll('.btn');
   //console.log(allButtons);
@@ -213,8 +212,8 @@
     let seatbooked=new Array();
   // Function to update seat status and total amount
   function updateSeatStatus(button) {
-      if (button.style.backgroundColor !== 'lightgreen') {
-          button.style.backgroundColor = 'lightgreen';
+      if (button.style.backgroundColor !== '#6eaf6e') {
+          button.style.backgroundColor = '#6eaf6e';
           bookedSeats++;
           totalAmount += seatPrice;
           seatbooked.push($(button).val());
